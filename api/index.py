@@ -12,6 +12,14 @@ app = Flask(
     static_folder="../static"
 )
 
+# Model weights based on F1-Score analysis on test set
+# Random Forest: 0.3384, Logistic Regression: 0.3298, XGBoost: 0.3318
+MODEL_WEIGHTS = {
+    "random_forest": 0.3384,
+    "logistic_regression": 0.3298,
+    "xgboost": 0.3318
+}
+
 # Load dataset (303 rows CSV)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(BASE_DIR, "..", "heart.csv")
@@ -78,9 +86,41 @@ def home():
             }
         }
 
-        # Calculate average prediction
-        avg_disease_prob = (rf_disease_prob + lr_disease_prob + xgb_disease_prob) / 3
-        result = "⚠️ Heart Disease Detected" if avg_disease_prob > 50 else "✅ No Heart Disease"
+        # Calculate weighted average prediction (based on F1-Score performance)
+        weighted_disease_prob = (
+            MODEL_WEIGHTS["random_forest"] * rf_disease_prob +
+            MODEL_WEIGHTS["logistic_regression"] * lr_disease_prob +
+            MODEL_WEIGHTS["xgboost"] * xgb_disease_prob
+        )
+        
+        # Convert to 0-10 risk scale
+        risk_score = (weighted_disease_prob / 100) * 10
+        
+        # Detect disagreement between models (if variance is high)
+        disease_probs = [rf_disease_prob, lr_disease_prob, xgb_disease_prob]
+        prob_variance = max(disease_probs) - min(disease_probs)
+        has_disagreement = prob_variance > 25  # >25% difference = disagreement
+        
+        # Determine risk category
+        if risk_score < 2.5:
+            risk_category = "LOW RISK"
+        elif risk_score < 5:
+            risk_category = "MODERATE RISK"
+        elif risk_score < 7.5:
+            risk_category = "HIGH RISK"
+        else:
+            risk_category = "VERY HIGH RISK"
+        
+        result = "⚠️ Heart Disease Detected" if weighted_disease_prob > 50 else "✅ No Heart Disease"
+        
+        # Add weighted results to model_results
+        model_results["weighted_ensemble"] = {
+            "weighted_disease_prob": round(weighted_disease_prob, 2),
+            "risk_score": round(risk_score, 2),
+            "risk_category": risk_category,
+            "has_disagreement": has_disagreement,
+            "prob_variance": round(prob_variance, 2)
+        }
 
     return render_template(
         "index.html",

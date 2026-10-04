@@ -89,10 +89,45 @@
             <div class="models-results">
                 <h3>Model Analysis</h3>
                 
+                <!-- Weighted Ensemble Results -->
+                {% if model_results.weighted_ensemble %}
+                <div class="ensemble-card">
+                    <div class="ensemble-header">
+                        <h4>🎯 Combined Risk Assessment (Weighted Ensemble)</h4>
+                    </div>
+                    
+                    <div class="ensemble-metrics">
+                        <div class="risk-score-display">
+                            <span class="risk-score-label">Risk Score:</span>
+                            <span class="risk-score-value">{{ model_results.weighted_ensemble.risk_score }}/10</span>
+                            <span class="risk-category {% if model_results.weighted_ensemble.risk_category == 'LOW RISK' %}low-risk{% elif model_results.weighted_ensemble.risk_category == 'MODERATE RISK' %}moderate-risk{% elif model_results.weighted_ensemble.risk_category == 'HIGH RISK' %}high-risk{% else %}very-high-risk{% endif %}">
+                                {{ model_results.weighted_ensemble.risk_category }}
+                            </span>
+                        </div>
+                        
+                        <div class="risk-bar-container">
+                            <div class="risk-bar" style="width: {{ model_results.weighted_ensemble.risk_score * 10 }}%"></div>
+                        </div>
+                        
+                        <div class="ensemble-note">
+                            <p><strong>Disease Probability:</strong> {{ model_results.weighted_ensemble.weighted_disease_prob }}%</p>
+                            {% if model_results.weighted_ensemble.has_disagreement %}
+                            <p class="disagreement-warning">⚠️ <strong>Model Disagreement Detected:</strong> Variance = {{ model_results.weighted_ensemble.prob_variance }}%. Recommend doctor review.</p>
+                            {% else %}
+                            <p class="consensus-note">✅ Models agree on the assessment.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <h4 style="margin-top: 20px; margin-bottom: 15px;">Individual Model Results</h4>
+                
                 {% for model_key, model_data in model_results.items() %}
+                {% if model_key != 'weighted_ensemble' %}
                 <div class="model-card">
                     <div class="model-header">
-                        <h4>{{ model_data.name }}</h4>
+                        <h5>{{ model_data.name }}</h5>
                         <span class="model-prediction">{{ model_data.prediction }}</span>
                     </div>
                     
@@ -114,6 +149,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
             {% endif %}
