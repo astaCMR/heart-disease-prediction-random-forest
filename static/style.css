@@ -129,6 +129,145 @@ button:hover {
     color: #2c3e50;
 }
 
+.result-container {
+    grid-column: 1 / -1;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.overall-result {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.overall-result h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.models-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.models-results h3 {
+    grid-column: 1 / -1;
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.model-card {
+    background: #f8f9fa;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.model-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.model-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.model-header h4 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.model-prediction {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    background: #f0f0f0;
+}
+
+.model-prediction:contains("Disease") {
+    background: #ffe0e0;
+    color: #d32f2f;
+}
+
+.probability-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prob-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.prob-label {
+    min-width: 80px;
+    font-weight: 600;
+    color: #555;
+}
+
+.prob-bar-container {
+    flex: 1;
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.prob-bar {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 4px;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.prob-bar.disease {
+    background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+}
+
+.prob-bar.healthy {
+    background: linear-gradient(90deg, #51cf66, #37b24d);
+}
+
+.prob-value {
+    min-width: 45px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.disease-value {
+    color: #d32f2f;
+}
+
+.healthy-value {
+    color: #2e7d32;
+}
+
 @media (max-width: 600px) {
     .container {
         width: 90%;
@@ -141,5 +280,31 @@ button:hover {
     button,
     .result {
         grid-column: span 1;
+    }
+
+    .models-results {
+        grid-template-columns: 1fr;
+    }
+
+    .model-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .prob-row {
+        flex-wrap: wrap;
+    }
+
+    .prob-bar-container {
+        min-height: 24px;
+    }
+
+    .overall-result h2 {
+        font-size: 20px;
+    }
+
+    .model-header h4 {
+        font-size: 14px;
     }
 }

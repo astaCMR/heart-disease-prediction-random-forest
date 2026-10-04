@@ -80,8 +80,43 @@
         <button type="submit">Predict</button>
 
         {% if result %}
-        <div class="result">
-            {{ result }}
+        <div class="result-container">
+            <div class="overall-result">
+                <h2>{{ result }}</h2>
+            </div>
+
+            {% if model_results %}
+            <div class="models-results">
+                <h3>Model Analysis</h3>
+                
+                {% for model_key, model_data in model_results.items() %}
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>{{ model_data.name }}</h4>
+                        <span class="model-prediction">{{ model_data.prediction }}</span>
+                    </div>
+                    
+                    <div class="probability-section">
+                        <div class="prob-row">
+                            <span class="prob-label">Disease Risk:</span>
+                            <div class="prob-bar-container">
+                                <div class="prob-bar disease" style="width: {{ model_data.disease_prob }}%"></div>
+                            </div>
+                            <span class="prob-value disease-value">{{ model_data.disease_prob }}%</span>
+                        </div>
+                        
+                        <div class="prob-row">
+                            <span class="prob-label">Healthy:</span>
+                            <div class="prob-bar-container">
+                                <div class="prob-bar healthy" style="width: {{ model_data.healthy_prob }}%"></div>
+                            </div>
+                            <span class="prob-value healthy-value">{{ model_data.healthy_prob }}%</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
         {% endif %}
 
