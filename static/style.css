@@ -33,6 +33,12 @@ form {
     gap: 12px;
 }
 
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
 form input {
     width: 100%;
     padding: 10px;
@@ -47,8 +53,58 @@ form input:focus {
     box-shadow: 0 0 4px rgba(52, 152, 219, 0.4);
 }
 
+.info-icon {
+    position: absolute;
+    right: 8px;
+    font-size: 16px;
+    cursor: help;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.info-icon:hover {
+    opacity: 1;
+}
+
+.info-icon::before {
+    content: attr(title);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2c3e50;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.info-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 118%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #2c3e50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.info-icon:hover::before,
+.info-icon:hover::after {
+    opacity: 1;
+}
+
 button {
-    grid-column: span 2;
+    grid-column: 1 / -1;
     padding: 12px;
     font-size: 16px;
     background-color: #3498db;
@@ -63,7 +119,7 @@ button:hover {
 }
 
 .result {
-    grid-column: span 2;
+    grid-column: 1 / -1;
     margin-top: 15px;
     padding: 12px;
     text-align: center;

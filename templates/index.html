@@ -12,25 +12,70 @@
 
     <form method="POST">
 
-        <input type="number" name="age" placeholder="Age" value="{{ values.age }}" required>
-        <input type="number" name="sex" placeholder="Sex (1 = Male, 0 = Female)" value="{{ values.sex }}" required>
+        <div class="input-group">
+            <input type="number" name="age" placeholder="Age" value="{{ values.age }}" required>
+            <span class="info-icon" title="Your age in years">ℹ️</span>
+        </div>
 
-        <input type="number" name="cp" placeholder="Chest Pain Type (0–3)" value="{{ values.cp }}" required>
-        <input type="number" name="trestbps" placeholder="Resting Blood Pressure" value="{{ values.trestbps }}" required>
+        <div class="input-group">
+            <input type="number" name="sex" placeholder="Sex (1 = Male, 0 = Female)" value="{{ values.sex }}" required>
+            <span class="info-icon" title="1 = Male, 0 = Female">ℹ️</span>
+        </div>
 
-        <input type="number" name="chol" placeholder="Cholesterol" value="{{ values.chol }}" required>
-        <input type="number" name="fbs" placeholder="Fasting Blood Sugar (1/0)" value="{{ values.fbs }}" required>
+        <div class="input-group">
+            <input type="number" name="cp" placeholder="Chest Pain Type (0–3)" value="{{ values.cp }}" required>
+            <span class="info-icon" title="0=typical angina, 1=atypical angina, 2=non-anginal pain, 3=asymptomatic">ℹ️</span>
+        </div>
 
-        <input type="number" name="restecg" placeholder="Rest ECG (0–2)" value="{{ values.restecg }}" required>
-        <input type="number" name="thalach" placeholder="Max Heart Rate" value="{{ values.thalach }}" required>
+        <div class="input-group">
+            <input type="number" name="trestbps" placeholder="Resting Blood Pressure" value="{{ values.trestbps }}" required>
+            <span class="info-icon" title="Blood pressure at rest in mmHg (normal: 90-120 mmHg)">ℹ️</span>
+        </div>
 
-        <input type="number" name="exang" placeholder="Exercise Angina (1/0)" value="{{ values.exang }}" required>
-        <input type="number" step="0.1" name="oldpeak" placeholder="Oldpeak" value="{{ values.oldpeak }}" required>
+        <div class="input-group">
+            <input type="number" name="chol" placeholder="Cholesterol" value="{{ values.chol }}" required>
+            <span class="info-icon" title="Serum cholesterol level in mg/dl (normal: below 200 mg/dl)">ℹ️</span>
+        </div>
 
-        <input type="number" name="slope" placeholder="Slope (0–2)" value="{{ values.slope }}" required>
-        <input type="number" name="ca" placeholder="Major Vessels (0–4)" value="{{ values.ca }}" required>
+        <div class="input-group">
+            <input type="number" name="fbs" placeholder="Fasting Blood Sugar (1/0)" value="{{ values.fbs }}" required>
+            <span class="info-icon" title="1 if fasting blood sugar > 120 mg/dl, 0 otherwise">ℹ️</span>
+        </div>
 
-        <input type="number" name="thal" placeholder="Thal (1–3)" value="{{ values.thal }}" required>
+        <div class="input-group">
+            <input type="number" name="restecg" placeholder="Rest ECG (0–2)" value="{{ values.restecg }}" required>
+            <span class="info-icon" title="Resting ECG: 0=normal, 1=ST-T wave abnormality, 2=LV hypertrophy">ℹ️</span>
+        </div>
+
+        <div class="input-group">
+            <input type="number" name="thalach" placeholder="Max Heart Rate" value="{{ values.thalach }}" required>
+            <span class="info-icon" title="Maximum heart rate achieved during exercise in bpm">ℹ️</span>
+        </div>
+
+        <div class="input-group">
+            <input type="number" name="exang" placeholder="Exercise Angina (1/0)" value="{{ values.exang }}" required>
+            <span class="info-icon" title="1 if exercise induced angina, 0 otherwise">ℹ️</span>
+        </div>
+
+        <div class="input-group">
+            <input type="number" step="0.1" name="oldpeak" placeholder="Oldpeak" value="{{ values.oldpeak }}" required>
+            <span class="info-icon" title="ST depression induced by exercise relative to rest (0-6.2 units)">ℹ️</span>
+        </div>
+
+        <div class="input-group">
+            <input type="number" name="slope" placeholder="Slope (0–2)" value="{{ values.slope }}" required>
+            <span class="info-icon" title="Slope of ST segment: 0=upsloping, 1=flat, 2=downsloping">ℹ️</span>
+        </div>
+
+        <div class="input-group">
+            <input type="number" name="ca" placeholder="Major Vessels (0–4)" value="{{ values.ca }}" required>
+            <span class="info-icon" title="Number of major vessels (0-3) colored by fluoroscopy">ℹ️</span>
+        </div>
+
+        <div class="input-group">
+            <input type="number" name="thal" placeholder="Thal (1–3)" value="{{ values.thal }}" required>
+            <span class="info-icon" title="Thalassemia: 1=normal, 2=fixed defect, 3=reversible defect">ℹ️</span>
+        </div>
 
         <button type="submit">Predict</button>
 
