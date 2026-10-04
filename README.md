@@ -90,18 +90,154 @@ heart-disease-prediction/
 
 ---
 
-## ▶️ How to Run the Project
+## ▶️ How to Run the Project Locally
 
-### Step 1: Install Required Packages
+This guide will help you run the Heart Disease Prediction application on your local machine. You only need **Python** installed to get started!
+
+### 📋 Prerequisites
+- **Python 3.7+** installed on your system
+- A command line/terminal application
+- A web browser (Chrome, Firefox, Edge, Safari, etc.)
+
+#### Verify Python Installation
+Open your terminal/command prompt and run:
+```bash
+python --version
+```
+You should see something like `Python 3.x.x`. If not, [download Python](https://www.python.org/downloads/).
+
+---
+
+### 🚀 Installation & Setup Steps
+
+#### Step 1: Clone or Download the Repository
+If you have Git installed:
+```bash
+git clone https://github.com/astaCMR/heart-disease-prediction-random-forest.git
+cd heart-disease-prediction-random-forest
+```
+
+Or download the ZIP file from GitHub and extract it.
+
+#### Step 2: Navigate to Project Directory
+```bash
+cd Heart-Disaese-Prediction-Using-Random-Forest
+```
+
+#### Step 3: Create a Virtual Environment (Recommended)
+A virtual environment isolates project dependencies from your system Python.
+
+**On Windows:**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+**On macOS/Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+After activation, your terminal should show `(venv)` at the beginning of the line.
+
+#### Step 4: Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
-### Step 2: Run Flask Application
+
+This will install all required packages:
+- **Flask** - Web framework for the UI
+- **NumPy** - Numerical computing
+- **Pandas** - Data processing
+- **Scikit-learn** - Machine Learning library
+
+The installation process may take 1-2 minutes depending on your internet speed.
+
+#### Step 5: Run the Flask Application
+```bash
+python run_local.py
 ```
-python app.py
+
+You should see output similar to:
 ```
-### Step 3: Open Browser
-http://127.0.0.1:5000/
+ * Serving Flask app 'api.index'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in production deployment.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+```
+
+#### Step 6: Open in Your Browser
+Open your web browser and navigate to:
+```
+http://127.0.0.1:5000
+```
+
+🎉 **The application is now running locally!**
+
+---
+
+### 📝 Using the Application
+
+1. **Fill in Medical Information**: Enter the 13 medical parameters in the form
+   - Hover over the **ℹ️ info icons** next to each field to see what each parameter means
+   - All fields are required
+
+2. **Submit the Form**: Click the "Predict" button
+
+3. **View Results**: The prediction result will appear:
+   - ✅ **No Heart Disease** - Low risk of heart disease
+   - ⚠️ **Heart Disease Detected** - Higher risk of heart disease
+
+---
+
+### 🛠️ Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| `Command 'python' not found` | Python is not installed or not in PATH. Download from [python.org](https://www.python.org/downloads/) |
+| `ModuleNotFoundError: No module named 'flask'` | Run `pip install -r requirements.txt` again |
+| `Address already in use` | Port 5000 is busy. Change port in `run_local.py` or restart your system |
+| `PermissionError` when accessing `/api` | Run terminal as administrator (Windows) or use `sudo` (macOS/Linux) |
+| Browser shows "Connection refused" | Ensure Flask is running and port 5000 is accessible |
+
+---
+
+### ⏹️ Stopping the Application
+
+Press `CTRL+C` in your terminal to stop the Flask server.
+
+To deactivate the virtual environment:
+```bash
+deactivate
+```
+
+---
+
+### 🔄 Running Again Later
+
+After closing the application, to run it again:
+
+1. Open terminal in the project directory
+2. Activate virtual environment:
+   - **Windows**: `venv\Scripts\activate`
+   - **macOS/Linux**: `source venv/bin/activate`
+3. Run: `python run_local.py`
+4. Open browser to `http://127.0.0.1:5000`
+
+---
+
+### 📦 Project Files Explained
+
+| File/Folder | Purpose |
+|-------------|---------|
+| `run_local.py` | Entry point - runs the Flask application |
+| `api/index.py` | Backend logic - Flask routes and ML model |
+| `templates/index.html` | Frontend - HTML form and UI |
+| `static/style.css` | Styling - CSS for the web interface |
+| `heart.csv` | Dataset - 303 patient records used for training |
+| `requirement.txt` | List of Python dependencies |
 
 ## 📈 Model Performance
 
